@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dalton Friends of the Wayne County Public Library</title>
+
+    <!-- ============ STYLES ============ -->
+    <style>
+      /* Global Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        background-color: #f3f4f6;
+        color: #333;
+        line-height: 1.5;
+        scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+      }
+
+      /* Remove default link underline, use hover underline */
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* ============ HEADER / NAVBAR ============ */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        background-color: #f88518; /* PayPal-yellow */
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      /* Logo & Title */
+      .logo-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .logo-title img {
+        height: 50px; /* Adjust as needed */
+        width: auto;
+      }
+      .logo-title h1 {
+        color: #333;
+        font-size: 1.2rem;
+        white-space: nowrap;
+      }
+
+      /* Hamburger Icon */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        cursor: pointer;
+      }
+      .bar {
+        width: 25px;
+        height: 3px;
+        background-color: #333; /* Matches text color */
+      }
+
+      /* Navigation Links */
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 20px;
+      }
+      nav li a {
+        color: #333;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+      nav li a:hover {
+        color: #000; /* Slight darkening on hover */
+      }
+
+      /* ============ MOBILE MENU STYLES ============ */
+      @media (max-width: 768px) {
+        nav ul {
+          position: absolute;
+          top: 70px;
+          right: 0;
+          background-color: #f88518;
+          flex-direction: column;
+          width: 200px;
+          padding: 20px;
+          gap: 10px;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(-20px);
+          transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+        nav ul.open {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+        .hamburger {
+          display: flex;
+        }
+      }
+
+      /* ============ MAIN CONTENT CONTAINER ============ */
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+      }
+
+      /* Section Titles */
+      h2 {
+        font-size: 1.6rem;
+        margin: 20px 0 10px;
+        color: #2c3e50;
+      }
+
+      /* Paragraph & Lists */
+      p {
+        margin-bottom: 1em;
+        font-size: 1rem;
+      }
+      ul {
+        list-style-type: disc;
+        margin-left: 1.5rem;
+        margin-bottom: 1em;
+      }
+
+      /* ============ DONATION SECTION ============ */
+      .donation-section {
+        text-align: center;
+        margin: 30px 0;
+      }
+      .donation-buttons a {
+        display: inline-block;
+        margin: 10px;
+        padding: 12px 20px;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: opacity 0.2s ease;
+        color: #fff;
+      }
+      .venmo-button {
+        background-color: #3d95ce; /* Venmo color */
+      }
+      .paypal-button {
+        background-color: #f88518; /* PayPal color */
+        color: #333;
+      }
+      .donation-buttons a:hover {
+        opacity: 0.8;
+      }
+
+      /* ============ FORM SECTION ============ */
+      .form-section {
+        background-color: #f8fafc;
+        border-radius: 6px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+      label {
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="number"],
+      textarea {
+        padding: 0.6rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        max-width: 400px;
+      }
+      input[type="checkbox"] {
+        margin-right: 0.5rem;
+      }
+      .note {
+        font-style: italic;
+        font-size: 0.9rem;
+        color: #555;
+      }
+      button[type="submit"] {
+        align-self: start;
+        background-color: #2c3e50;
+        color: #fff;
+        padding: 0.7rem 1.2rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+      button[type="submit"]:hover {
+        background-color: #1a252f;
+      }
+
+      /* ============ FOOTER ============ */
+      footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #f88518; /* same as header */
+        color: #333;
+        margin-top: 30px;
+      }
+      footer p {
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ============ HEADER WITH LOGO & NAV ============ -->
+    <header>
+      <!-- Logo + Title -->
+      <div class="logo-title">
+        <img
+          src="https://www.wcpl.info/sites/default/files/wcpl_blue_transparent.png"
+          alt="WCPL Logo"
+        />
+        <h1>Dalton Friends of WCPL</h1>
+      </div>
+
+      <!-- Hamburger Icon -->
+      <div class="hamburger" id="menu-btn">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav>
+        <ul id="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#join">Join</a></li>
+          <li><a href="#donate">Donate</a></li>
+          <li><a href="#membership-form">Membership Form</a></li>
+          <!-- Removed Facebook link from header -->
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <div class="container">
+      <!-- About / Become a Friend -->
+      <section id="about">
+        <h2>Become a Friend</h2>
+        <p>
+          <strong>Who Are We?</strong><br />
+          The Dalton Friends of the Wayne County Public Library is a non-profit
+          organization founded by local volunteers and dedicated to promoting
+          and supporting the services our library provides to the community.
+        </p>
+        <p>
+          The Friends provide funds for special purchases outside the library's
+          publicly funded budget. Among the many purchases the Friends have made
+          since the group was founded in 2007 are:
+        </p>
+        <ul>
+          <li>A portable sound system for outdoor programs</li>
+          <li>Replacement and additional toys for the children's area</li>
+          <li>Benches for the front porch</li>
+          <li>Seasonal indoor decorations</li>
+          <li>Gift baskets for library reading promotions</li>
+          <li>A refrigerator and microwave for the staff work area</li>
+          <li>Summer flowers in large pots at the library entrance</li>
+          <li>$10,000 toward library expansion in 2015</li>
+          <li>Sponsorship of selected library programs</li>
+        </ul>
+        <p>
+          Friends also provide hands-on help and refreshments at special events.
+          Ongoing sale of shred bags at the library desk, annual memberships,
+          and donations are our primary means of generating money. We are a
+          501(c)(3) non-profit organization.
+        </p>
+
+        <!-- Replaced text link with a Facebook image button -->
+        <p>
+          <strong>Follow Us on Facebook!</strong><br />
+          <a
+            href="https://www.facebook.com/groups/985710385638990"
+            target="_blank"
+          >
+            <img
+              src="https://img.shields.io/badge/Follow%20Us%20On-Facebook-4267B2?logo=facebook&logoColor=white"
+              alt="Follow Us on Facebook"
+              style="height: 30px"
+            />
+          </a>
+        </p>
+      </section>
+
+      <!-- How to Join -->
+      <section id="join">
+        <h2>Join the Dalton Friends</h2>
+        <p><strong>Ways to contribute:</strong></p>
+        <ul>
+          <li>Become a member</li>
+          <li>Staff special library events</li>
+          <li>Provide refreshments for special occasions</li>
+        </ul>
+        <p><strong>Two Types of Membership:</strong></p>
+        <ul>
+          <li>
+            <strong>Active Members</strong> – Attend meetings several times a
+            year, volunteer for projects as needed.
+          </li>
+          <li>
+            <strong>Members</strong> – Financial support but not able to
+            volunteer.
+          </li>
+        </ul>
+        <p><em>Books bring Friends together!</em></p>
+      </section>
+
+      <!-- Donation Buttons -->
+      <section class="donation-section" id="donate">
+        <h2>Support Us Online</h2>
+        <p>Pay membership dues or make a donation via Venmo or PayPal.</p>
+        <div class="donation-buttons">
+          <!-- Replace # with your actual Venmo/PayPal links -->
+          <a
+            href="https://venmo.com/u/Brianne-Froese"
+            target="_blank"
+            class="venmo-button"
+            >Venmo</a
+          >
+          <a
+            href="https://paypal.me/schlabes?country.x=US&locale.x=en_US"
+            target="_blank"
+            class="paypal-button"
+            >PayPal</a
+          >
+        </div>
+      </section>
+
+      <!-- Membership Form -->
+      <section class="form-section" id="membership-form">
+        <h2>Membership Form</h2>
+        <p class="note">
+          Please fill out this form to become a
+          <strong>2025 Dalton Friend</strong> of the Wayne County Public
+          Library.
+        </p>
+
+        <form
+          action="https://formsubmit.co/matthewshawn89@gmail.com"
+          method="POST"
+        >
+          <!-- FormSubmit Configuration -->
+          <input type="hidden" name="_captcha" value="false" />
+          <!-- (Optional) Redirect to a thank-you page after submission -->
+          <!-- <input type=\"hidden\" name=\"_next\" value=\"https://yoursite.com/thankyou.html\"> -->
+
+          <!-- Name / Address -->
+          <label for="name">Name(s):</label>
+          <input type="text" id="name" name="Name" required />
+
+          <label for="address">Address:</label>
+          <input type="text" id="address" name="Address" required />
+
+          <label for="city">City:</label>
+          <input type="text" id="city" name="City" required />
+
+          <label for="state">State:</label>
+          <input type="text" id="state" name="State" required />
+
+          <label for="zip">Zip:</label>
+          <input type="text" id="zip" name="Zip" required />
+
+          <!-- Phone / Email -->
+          <label for="phone">Phone:</label>
+          <input type="tel" id="phone" name="Phone" />
+
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="Email" required />
+          <p class="note">
+            E-mail addresses are kept confidential and are not shared with other
+            organizations.
+          </p>
+
+          <!-- Checkboxes & Additional Donation -->
+          <div>
+            <label for="household-dues">
+              <input
+                type="checkbox"
+                id="household-dues"
+                name="Household Dues"
+                value="10"
+              />
+              Household Dues ($10)
+            </label>
+          </div>
+          <div>
+            <label for="business-donor">
+              <input
+                type="checkbox"
+                id="business-donor"
+                name="Business Donor"
+                value="25"
+              />
+              Business Donor ($25)
+            </label>
+          </div>
+
+          <label for="additional-donation">Additional Donation ($):</label>
+          <input
+            type="number"
+            id="additional-donation"
+            name="Additional Donation"
+            step="0.01"
+            min="0"
+          />
+
+          <!-- Read-Only Total -->
+          <label for="total">TOTAL ($):</label>
+          <input
+            type="number"
+            id="total"
+            name="Total"
+            step="0.01"
+            min="0"
+            readonly
+          />
+
+          <!-- Submit Button -->
+          <button type="submit">Submit</button>
+        </form>
+
+        <p class="note" style="margin-top: 1rem">
+          Please make checks payable to:
+          <strong>Dalton Friends of the Library</strong><br />
+          Mail to:
+          <strong>Dalton Library Friends, PO Box 105, Dalton, OH 44618</strong>
+        </p>
+      </section>
+    </div>
+
+    <!-- ============ FOOTER ============ -->
+    <footer>
+      <p>&copy; 2025 Dalton Friends of the Wayne County Public Library</p>
+    </footer>
+
+    <!-- ============ SCRIPTS ============ -->
+    <script>
+      // Toggle mobile menu
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+      menuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("open");
+      });
+
+      // Auto-calculate TOTAL from checkboxes + additional donation
+      const householdCheckbox = document.getElementById("household-dues");
+      const businessCheckbox = document.getElementById("business-donor");
+      const additionalDonationInput = document.getElementById(
+        "additional-donation"
+      );
+      const totalInput = document.getElementById("total");
+
+      function updateTotal() {
+        let total = 0;
+        if (householdCheckbox.checked) total += 10;
+        if (businessCheckbox.checked) total += 25;
+
+        const additional = parseFloat(additionalDonationInput.value) || 0;
+        total += additional;
+
+        // Display the total with two decimal places
+        totalInput.value = total.toFixed(2);
+      }
+
+      // Listen for changes to the checkboxes or additional donation
+      householdCheckbox.addEventListener("change", updateTotal);
+      businessCheckbox.addEventListener("change", updateTotal);
+      additionalDonationInput.addEventListener("input", updateTotal);
+    </script>
+  </body>
+</html>
